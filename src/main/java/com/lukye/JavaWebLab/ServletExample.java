@@ -8,9 +8,17 @@ import java.io.IOException;
 
 public class ServletExample extends HttpServlet {
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doProcess(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute ("servletName", "servletToJsp");
-        getServletConfig().getServletContext().getRequestDispatcher(
-                "/jsp/jsptoserv/hello.jsp").forward(req, resp);
+        doProcess(req, resp);
+    }
+
+    private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.setAttribute("servletName", "servletExample");
+        resp.sendRedirect("jsp/servletExample.jsp");
     }
 }

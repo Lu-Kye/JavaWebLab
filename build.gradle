@@ -3,7 +3,9 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+
+// gretty plugin
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 repositories {
     mavenLocal()
@@ -13,4 +15,11 @@ repositories {
 dependencies {
     compile 'javax.servlet:javax.servlet-api:3.1.0'
     testCompile 'junit:junit:4.11'
+}
+
+gretty {
+    httpPort = 8080
+    debugPort = 9999
+    servletContainer = 'jetty9'
+    contextPath = '/JavaWebLab'
 }
