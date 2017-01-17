@@ -21,5 +21,12 @@ gretty {
     httpPort = 8080
     debugPort = 9999
     servletContainer = 'jetty9'
-    contextPath = '/JavaWebLab'
+    contextPath = '/$project.name'
+}
+
+task labDebugBegin {
+    println 'Debug beginning...'
+}
+
+task labDebug(dependsOn: ['labDebugBegin', 'appRunDebug']) {
 }
