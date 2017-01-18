@@ -5,16 +5,22 @@ apply plugin: 'java'
 apply plugin: 'war'
 
 // gretty plugin
-apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+apply from: 'gretty.plugin'
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
+def servletVersion = '3.1.0'
+def junitVersion = '4.11'
+def springVersion = '4.3.5.RELEASE'
+
 dependencies {
-    compile 'javax.servlet:javax.servlet-api:3.1.0'
-    testCompile 'junit:junit:4.11'
+    compile "javax.servlet:javax.servlet-api:$servletVersion"
+    compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    testCompile "junit:junit:$junitVersion"
 }
 
 gretty {

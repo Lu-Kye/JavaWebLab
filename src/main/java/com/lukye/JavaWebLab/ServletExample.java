@@ -24,7 +24,8 @@ public class ServletExample extends HttpServlet {
     }
 
     private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.setAttribute("servletName", "servletExample");
-        resp.sendRedirect("jsp/servletExample.jsp");
+//        req.setAttribute("servletName", "servletExample");
+//        resp.sendRedirect("jsp/servletExample.jsp");
+        resp.getWriter().print(req.getServletPath());
     }
 }
