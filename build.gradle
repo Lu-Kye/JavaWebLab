@@ -18,10 +18,10 @@ dependencies {
 }
 
 gretty {
-    httpPort = 8080
+    httpPort = 8888
     debugPort = 9999
     servletContainer = 'jetty9'
-    contextPath = '/$project.name'
+    contextPath = "/${project.name}"
 }
 
 task labDebugBegin {
