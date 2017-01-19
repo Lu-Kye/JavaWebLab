@@ -1,25 +1,26 @@
 group 'com.lukye'
 version '1.0-SNAPSHOT'
 
+def pluginDir = "$rootDir/gradle"
+
+apply from: "$pluginDir/dependencies.gradle"
+
 apply plugin: 'java'
 apply plugin: 'war'
-
-// gretty plugin
-apply from: 'gretty.plugin'
+apply from: "$pluginDir/gretty.gradle"
+apply from: "$pluginDir/mybatisGenerator.gradle"
 
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
 }
-
-def servletVersion = '3.1.0'
-def junitVersion = '4.11'
-def springVersion = '4.3.5.RELEASE'
 
 dependencies {
     compile "javax.servlet:javax.servlet-api:$servletVersion"
     compile "org.springframework:spring-web:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.mybatis:mybatis:$mybatisVersion"
     testCompile "junit:junit:$junitVersion"
 }
 
@@ -28,11 +29,4 @@ gretty {
     debugPort = 9999
     servletContainer = 'jetty9'
     contextPath = "/${project.name}"
-}
-
-task labDebugBegin {
-    println 'Debug beginning...'
-}
-
-task labDebug(dependsOn: ['labDebugBegin', 'appRunDebug']) {
 }
