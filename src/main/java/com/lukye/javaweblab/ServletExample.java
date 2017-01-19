@@ -1,4 +1,4 @@
-package com.lukye.JavaWebLab;
+package com.lukye.javaweblab;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

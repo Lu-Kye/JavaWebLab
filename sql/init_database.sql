@@ -1,1 +1,0 @@
-CREATE DATABASE `java_web_lab`;

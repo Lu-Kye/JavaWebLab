@@ -12,7 +12,7 @@
     <!-- Simple servlet example configuration -->
     <servlet>
         <servlet-name>ServletExample</servlet-name>
-        <servlet-class>com.lukye.JavaWebLab.ServletExample</servlet-class>
+        <servlet-class>com.lukye.javaweblab.ServletExample</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletExample</servlet-name>
