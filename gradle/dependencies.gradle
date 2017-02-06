@@ -9,6 +9,8 @@ ext {
 
     mybatisMapperVersion = '3.3.2'
 
+    mybatisSpringVersion = '1.3.0'
+
     mysqlVersion = '5.1.18'
 
     generatorVersion = '1.3.2'

@@ -13,7 +13,6 @@ public class UserService {
     {
     }
 
-    @Autowired
     public UserService(UserMapper mapper)
     {
         this.mapper = mapper;
