@@ -3,10 +3,10 @@ version '1.0-SNAPSHOT'
 
 def pluginDir = "$rootDir/gradle"
 
-apply from: "$pluginDir/dependencies.gradle"
-
 apply plugin: 'java'
 apply plugin: 'war'
+
+apply from: "$pluginDir/dependencies.gradle"
 apply from: "$pluginDir/gretty.gradle"
 apply from: "$pluginDir/mybatisGenerator.gradle"
 
@@ -21,7 +21,8 @@ dependencies {
     compile "org.springframework:spring-web:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "org.mybatis:mybatis:$mybatisVersion"
-    testCompile "junit:junit:$junitVersion"
+    testCompile "org.springframework:spring-test:$springVersion"
+//    testCompile "junit:junit:$junitVersion"
 }
 
 gretty {
