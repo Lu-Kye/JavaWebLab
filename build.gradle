@@ -11,9 +11,8 @@ apply from: "$pluginDir/gretty.gradle"
 apply from: "$pluginDir/mybatisGenerator.gradle"
 
 repositories {
-    mavenLocal()
-    mavenCentral()
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -22,7 +21,7 @@ dependencies {
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "org.mybatis:mybatis:$mybatisVersion"
     testCompile "org.springframework:spring-test:$springVersion"
-//    testCompile "junit:junit:$junitVersion"
+    testCompile "junit:junit:$junitVersion"
 }
 
 gretty {

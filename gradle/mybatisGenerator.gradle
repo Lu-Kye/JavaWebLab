@@ -6,6 +6,7 @@ dependencies {
     mybatisGenerator "org.mybatis.generator:mybatis-generator-core:${generatorVersion}"
     mybatisGenerator "mysql:mysql-connector-java:${mysqlVersion}"
     mybatisGenerator "tk.mybatis:mapper:${mybatisMapperVersion}"
+    mybatisGenerator "com.github.dcendents:mybatis-generator-plugins:1.2"
 }
 
 def getDbProperties = {
