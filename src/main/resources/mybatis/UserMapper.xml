@@ -1,387 +1,141 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lukye.javaweblab.springexample.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.lukye.javaweblab.springexample.model.User">
-    <id column="username" jdbcType="VARCHAR" property="username" />
-    <result column="id" jdbcType="BIGINT" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lukye.javaweblab.springexample.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.lukye.javaweblab.springexample.model.User" >
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Base_Column_List">
-    username, id, password, name, age, sex, birthday, created, updated
+  <sql id="Base_Column_List" >
+    name, id, username, password, age, sex, birthday, created, updated
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from user
-    where username = #{username,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
-    where username = #{username,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.lukye.javaweblab.springexample.model.User">
-    insert into user (username, id, password, 
-      name, age, sex, birthday, 
-      created, updated)
-    values (#{username,jdbcType=VARCHAR}, #{id,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.lukye.javaweblab.springexample.model.User" >
+    insert into user (name, id, username, 
+      password, age, sex, 
+      birthday, created, updated
+      )
+    values (#{name,jdbcType=VARCHAR}, #{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.lukye.javaweblab.springexample.model.User">
+  <insert id="insertSelective" parameterType="com.lukye.javaweblab.springexample.model.User" >
     insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
       </if>
-      <if test="id != null">
+      <if test="id != null" >
         id,
       </if>
-      <if test="password != null">
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
         password,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="age != null">
+      <if test="age != null" >
         age,
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex,
       </if>
-      <if test="birthday != null">
+      <if test="birthday != null" >
         birthday,
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created,
       </if>
-      <if test="updated != null">
+      <if test="updated != null" >
         updated,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="id != null">
+      <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="password != null">
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
+      <if test="age != null" >
         #{age,jdbcType=INTEGER},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         #{sex,jdbcType=INTEGER},
       </if>
-      <if test="birthday != null">
+      <if test="birthday != null" >
         #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="updated != null">
+      <if test="updated != null" >
         #{updated,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lukye.javaweblab.springexample.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lukye.javaweblab.springexample.model.User" >
     update user
-    <set>
-      <if test="id != null">
+    <set >
+      <if test="id != null" >
         id = #{id,jdbcType=BIGINT},
       </if>
-      <if test="password != null">
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
+      <if test="age != null" >
         age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="sex != null">
+      <if test="sex != null" >
         sex = #{sex,jdbcType=INTEGER},
       </if>
-      <if test="birthday != null">
+      <if test="birthday != null" >
         birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="created != null">
+      <if test="created != null" >
         created = #{created,jdbcType=TIMESTAMP},
       </if>
-      <if test="updated != null">
+      <if test="updated != null" >
         updated = #{updated,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where username = #{username,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lukye.javaweblab.springexample.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.lukye.javaweblab.springexample.model.User" >
     update user
     set id = #{id,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=TIMESTAMP},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
-    where username = #{username,jdbcType=VARCHAR}
-  </update>
-  <resultMap id="BaseResultMap" type="com.lukye.javaweblab.springexample.model.User">
-    <id column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    username, password, name, age, sex, birthday, created, updated
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where username = #{username,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user
-    where username = #{username,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.lukye.javaweblab.springexample.model.User">
-    insert into user (username, password, name, 
-      age, sex, birthday, 
-      created, updated)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lukye.javaweblab.springexample.model.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="updated != null">
-        updated,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null">
-        #{updated,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lukye.javaweblab.springexample.model.User">
-    update user
-    <set>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null">
-        updated = #{updated,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where username = #{username,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lukye.javaweblab.springexample.model.User">
-    update user
-    set password = #{password,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      sex = #{sex,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
-    where username = #{username,jdbcType=VARCHAR}
-  </update>
-  <resultMap id="BaseResultMap" type="com.lukye.javaweblab.springexample.model.User">
-    <id column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="created" jdbcType="TIMESTAMP" property="created" />
-    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    username, password, name, age, sex, birthday, created, updated
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where username = #{username,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user
-    where username = #{username,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.lukye.javaweblab.springexample.model.User">
-    <selectKey keyProperty="name" order="AFTER" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user (username, password, age, 
-      sex, birthday, created, 
-      updated)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lukye.javaweblab.springexample.model.User">
-    <selectKey keyProperty="name" order="AFTER" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="updated != null">
-        updated,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null">
-        #{updated,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lukye.javaweblab.springexample.model.User">
-    update user
-    <set>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null">
-        updated = #{updated,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where username = #{username,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lukye.javaweblab.springexample.model.User">
-    update user
-    set password = #{password,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      sex = #{sex,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP}
-    where username = #{username,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -4,23 +4,24 @@ import com.lukye.javaweblab.springexample.model.User;
 import com.lukye.javaweblab.springexample.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
-import java.util.StringJoiner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:context.xml"})
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
     @Autowired
     private UserService userService;
 
     private final String NAME = "root";
-    private Long id;
 
     public UserServiceTest()
     {
@@ -32,7 +33,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testInsert()
+    public void A_testInsert()
     {
         User user = new User();
         user.setName("root");
@@ -47,15 +48,19 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testSelect()
+    public void B_testSelect()
     {
         User user = userService.select(NAME);
+
+        Assert.assertNotNull(user);
     }
 
     @Test
-    public void testDelete()
+    public void C_testDelete()
     {
         User user = userService.select(NAME);
         userService.delete(user.getName());
+
+        Assert.assertNull(userService.select(NAME));
     }
 }
