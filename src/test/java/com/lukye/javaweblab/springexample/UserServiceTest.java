@@ -3,15 +3,13 @@ package com.lukye.javaweblab.springexample;
 import com.lukye.javaweblab.springexample.model.User;
 import com.lukye.javaweblab.springexample.service.UserService;
 import org.apache.ibatis.transaction.Transaction;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -34,7 +32,7 @@ public class UserServiceTest {
     {
     }
 
-    User createUserInstance()
+    private User createUserInstance()
     {
         User user = new User();
         user.setName(NAME);
@@ -72,13 +70,22 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
+    @Transactional()
     public void D_testTransaction()
     {
         User user = createUserInstance();
+
+        // This code is useless
+        // Link: http://docs.spring.io/spring/docs/3.0.5.RELEASE/reference/testing.html#testing-tx
+        // One common issue in tests that access a real database is their affect on the state of the persistence store.
+        // Even when you're using a development database, changes to the state may affect future tests.
+        // Also, many operations - such as inserting or modifying persistent data - cannot be performed (or verified) outside a transaction.
+        // The TestContext framework addresses this issue. By default, the framework will create and roll back a transaction for each test.
+        // You simply write code that can assume the existence of a transaction. If you call transactionally proxied objects in your tests, they will behave correctly, according to their transactional semantics. In addition, if test methods delete the contents of selected tables while running within a transaction, the transaction will roll back by default, and the database will return to its state prior to execution of the test. Transactional support is provided to your test class via a PlatformTransactionManager bean defined in the test's application context.
         user.setName("1");
         userService.insert(user);
 
+        // Do real transaction failure test
         try
         {
             user.setName("2");
