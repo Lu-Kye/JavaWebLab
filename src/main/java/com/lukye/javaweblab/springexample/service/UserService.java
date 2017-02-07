@@ -5,6 +5,9 @@ import com.lukye.javaweblab.springexample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LongSummaryStatistics;
+import java.util.StringJoiner;
+
 @Service
 public class UserService {
     private UserMapper mapper;
@@ -13,6 +16,7 @@ public class UserService {
     {
     }
 
+    @Autowired
     public UserService(UserMapper mapper)
     {
         this.mapper = mapper;
@@ -21,5 +25,15 @@ public class UserService {
     public void insert(User user)
     {
         mapper.insert(user);
+    }
+
+    public void delete(String name)
+    {
+        mapper.deleteByPrimaryKey(name);
+    }
+
+    public User select(String name)
+    {
+        return mapper.selectByPrimaryKey(name);
     }
 }

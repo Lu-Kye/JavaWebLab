@@ -9,11 +9,30 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- Properties -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
+    <!-- DataSource -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.pass}" />
+        <property name="initialSize" value="1" />
+        <property name="maxActive" value="20" />
+        <property name="maxWait" value="60000" />
+    </bean>
+
     <!-- Spring configuration -->
-    <context:component-scan base-package="com.lukye.javaweblab"/>
+    <context:component-scan base-package="com.lukye.javaweblab.springexample"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lukye.javaweblab.springexample" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
 
     <!-- Mybatis configuration -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lukye.javaweblab.springexample.mapper"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis.xml" />
+        <property name="mapperLocations" value="classpath:mybatis/*.xml" />
     </bean>
 </beans>

@@ -11,7 +11,9 @@ ext {
 
     mybatisSpringVersion = '1.3.0'
 
-    mysqlVersion = '5.1.18'
+    mysqlVersion = '5.1.38'
 
     generatorVersion = '1.3.2'
+
+    druidVersion = '1.0.18'
 }
