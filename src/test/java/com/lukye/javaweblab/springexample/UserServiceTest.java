@@ -2,6 +2,7 @@ package com.lukye.javaweblab.springexample;
 
 import com.lukye.javaweblab.springexample.model.User;
 import com.lukye.javaweblab.springexample.service.UserService;
+import org.apache.ibatis.transaction.Transaction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -11,6 +12,7 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -32,17 +34,22 @@ public class UserServiceTest {
     {
     }
 
-    @Test
-    public void A_testInsert()
+    User createUserInstance()
     {
         User user = new User();
-        user.setName("root");
-        user.setPassword("root");
+        user.setName(NAME);
+        user.setPassword(NAME);
         user.setBirthday(new Date());
         user.setCreated(new Date());
         user.setUpdated(new Date());
-        user.setUsername("Test Insert");
-        userService.insert(user);
+        user.setUsername(NAME);
+        return user;
+    }
+
+    @Test
+    public void A_testInsert()
+    {
+        userService.insert(createUserInstance());
 
         Assert.assertNotNull(userService.select(NAME));
     }
@@ -62,5 +69,30 @@ public class UserServiceTest {
         userService.delete(user.getName());
 
         Assert.assertNull(userService.select(NAME));
+    }
+
+    @Test
+    @Transactional
+    public void D_testTransaction()
+    {
+        User user = createUserInstance();
+        user.setName("1");
+        userService.insert(user);
+
+        try
+        {
+            user.setName("2");
+            userService.insert(user);
+
+            user.setName("3");
+            userService.insert(user);
+
+            user.setName(null);
+            userService.insert(user);
+        }
+        catch (Exception e)
+        {
+            System.out.print(e.getMessage());
+        }
     }
 }

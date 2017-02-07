@@ -4,17 +4,12 @@ import com.lukye.javaweblab.springexample.mapper.UserMapper;
 import com.lukye.javaweblab.springexample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.LongSummaryStatistics;
-import java.util.StringJoiner;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService {
     private UserMapper mapper;
-
-    public UserService()
-    {
-    }
 
     @Autowired
     public UserService(UserMapper mapper)
